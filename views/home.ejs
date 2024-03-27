@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+
+
+       /* Container styles */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f0f6ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+.form-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 40px;
+    background: linear-gradient(to right, #4d7fff, #3c64b1);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(to right, #3c64b1, #304f80);
+}
+
+/* Output styles */
+#output {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    text-align: center;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #dcdcdc;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(to right, #4d7fff, #3c64b1);
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+
+       
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+</head>
+
+<body>
+    <div class="container">
+        <form method="post" action="/url">
+            <div>
+                <h1>URL Shortener</h1>
+                <div class="form-container">
+                    <input type="text" name="User_url" id="urlInput" placeholder="Enter URL...">
+                    <button>Shorten</button>
+                </div>
+
+            </div>
+
+        </form>
+        <div id="output">
+            <% if(locals.id){ %>
+                <p>http://localhost:8000/url/<%=id%>
+                </p>
+                <% } %>
+        </div>
+    </div>
+    <div>
+        <% if(locals.allurls) { %>
+           <table>
+            <thead>
+               <th>S. No.</th>
+               <th>ShortUrl</th>
+               <th>RedirectUrl</th>
+               <th>Visits</th>
+            </thead>
+            <tbody>
+               <% allurls.forEach((url,index)=>{ %>
+                 <tr>
+                   <td><%=index+1 %></td>
+                   <td><%=url.shortURL%></td>
+                   <td><%=url.redirectURL%></td>
+                   <td><%=url.visitHistory.length%></td>
+                </tr>
+              <% }) %>
+            </tbody>
+           </table>
+       <% } %>
+    </div>
+</body>
+
+</html>

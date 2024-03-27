@@ -4,7 +4,6 @@ const {connectionToMongodb}=require("./connection");
 const app=express();
 const path=require('path');
 const urlRouter=require('./routes/url');
-const PORT=8000;
 const staticRouter=require("./routes/staticRouter");
 require('dotenv').config();
 app.use(express.urlencoded({extended:false}));
@@ -32,6 +31,6 @@ app.use("/",staticRouter);
 
 
 
-app.listen(PORT,()=>{
-    console.log(`server is listening on port ${PORT}`);
+app.listen(process.env.PORT,()=>{
+    console.log(`server is listening on port ${process.env.PORT}`);
 })
